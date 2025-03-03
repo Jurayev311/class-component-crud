@@ -57,7 +57,7 @@ export default class Crud extends Component {
                         </select>
                         <input type="text" value={this.state.hobby} onChange={e => this.setState({ hobby: e.target.value })} placeholder="Hobby" required className="p-2 bg-white text-black rounded" />
                         <button type="submit" className="bg-white text-blue-600 p-2 rounded active:scale-95 transition">
-                            Submit
+                            Create
                         </button>
                     </form>
                 </div>
