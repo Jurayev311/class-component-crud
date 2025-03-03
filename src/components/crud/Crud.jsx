@@ -18,27 +18,41 @@ export default class Crud extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { fname, lname, birthdate, gender, hobby, users } = this.state;
-
-        let newUser = {
-            id: Date.now(),
-            fname,
-            lname,
-            birthdate,
-            gender,
-            hobby,
-        };
-
-        this.setState({
-            users: [...users, newUser],
-            fname: "",
-            lname: "",
-            birthdate: "",
-            gender: "male",
-            hobby: "",
-        });
+        const { fname, lname, birthdate, gender, hobby, users, editUser } = this.state;
+    
+        if (editUser) {
+            this.setState({
+                users: users.map(user => 
+                    user.id === editUser ? { ...user, fname, lname, birthdate, gender, hobby } : user
+                ),
+                fname: "",
+                lname: "",
+                birthdate: "",
+                gender: "male",
+                hobby: "",
+                editUser: null,
+            });
+        } else {
+            let newUser = {
+                id: Date.now(),
+                fname,
+                lname,
+                birthdate,
+                gender,
+                hobby,
+            };
+    
+            this.setState({
+                users: [...users, newUser],
+                fname: "",
+                lname: "",
+                birthdate: "",
+                gender: "male",
+                hobby: "",
+            });
+        }
     };
-
+    
     handleEdit = (id) => {
         const user = this.state.users.find(user => user.id === id);
         this.setState({
