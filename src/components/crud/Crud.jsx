@@ -11,7 +11,8 @@ export default class Crud extends Component {
             birthdate: "",
             gender: "male",
             hobby: "",
-            users: []
+            users: [],
+            editUser: null
         };
     }
 
@@ -38,6 +39,18 @@ export default class Crud extends Component {
         });
     };
 
+    handleEdit = (id) => {
+        const user = this.state.users.find(user => user.id === id);
+        this.setState({
+            fname: user.fname,
+            lname: user.lname,
+            birthdate: user.birthdate,
+            gender: user.gender,
+            hobby: user.hobby,
+            editUser: id
+        });
+    };
+
     handleDelete = (id) => {
         this.setState({ users: this.state.users.filter((user) => user.id !== id) });
     };
@@ -57,8 +70,9 @@ export default class Crud extends Component {
                         </select>
                         <input type="text" value={this.state.hobby} onChange={e => this.setState({ hobby: e.target.value })} placeholder="Hobby" required className="p-2 bg-white text-black rounded" />
                         <button type="submit" className="bg-white text-blue-600 p-2 rounded active:scale-95 transition">
-                            Create
+                            {this.state.editUser ? "Save" : "Create"}
                         </button>
+
                     </form>
                 </div>
 
