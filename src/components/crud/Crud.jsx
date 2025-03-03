@@ -18,7 +18,7 @@ export default class Crud extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { fname, lname, birthdate, gender, hobby, users } = this.state;
-        
+
         let newUser = {
             id: Date.now(),
             fname,
@@ -27,7 +27,7 @@ export default class Crud extends Component {
             gender,
             hobby,
         };
-        
+
         this.setState({
             users: [...users, newUser],
             fname: "",
@@ -63,22 +63,33 @@ export default class Crud extends Component {
                 </div>
 
                 <div className="flex-1 p-6 bg-gray-100">
-                    <h2 className="text-2xl font-bold mb-4">Users List</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <h2 className="text-2xl font-bold mb-6 text-gray-800">Users List</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {this.state.users.map((user) => (
-                            <div key={user.id} className="flex items-center bg-white shadow-md rounded-lg p-4">
-                                <img src={user.gender === "male" ? male : female} alt="Avatar" className="w-14 h-14 rounded-full border mr-4" />
+                            <div key={user.id} className="flex items-center bg-white shadow-lg rounded-xl p-5 hover:shadow-xl transition-shadow duration-300">
+                                <img
+                                    src={user.gender === "male" ? male : female}
+                                    alt="Avatar"
+                                    className="w-16 h-16 rounded-full border-2 border-gray-200 mr-4"
+                                />
                                 <div className="flex-1">
-                                    <h3 className="text-lg font-bold">{user.fname} {user.lname}</h3>
-                                    <p className="text-gray-600 text-sm">📅 {user.birthdate} | 🏆 {user.hobby}</p>
+                                    <h3 className="text-lg font-semibold text-gray-800">{user.fname} {user.lname}</h3>
+                                    <p className="text-gray-600 text-sm mt-1">📅 {user.birthdate}</p>
+                                    <p className="text-gray-600 text-sm">🏆 {user.hobby}</p>
                                 </div>
-                                <div className="flex gap-3">
-                                <button onClick={() => this.handleEdit(user.id)} className="bg-yellow-500 px-3 py-1 rounded text-white hover:bg-yellow-400-400 transition">
-                                    edit
-                                </button>
-                                <button onClick={() => this.handleDelete(user.id)} className="bg-red-500 px-3 py-1 rounded text-white hover:bg-red-400 transition">
-                                    Delete
-                                </button>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => this.handleEdit(user.id)}
+                                        className="bg-yellow-400 px-3 py-1 rounded-lg text-white hover:bg-yellow-500 transition-colors duration-200"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => this.handleDelete(user.id)}
+                                        className="bg-red-500 px-3 py-1 rounded-lg text-white hover:bg-red-600 transition-colors duration-200"
+                                    >
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
                         ))}
